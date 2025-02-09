@@ -29,8 +29,8 @@ const Bill = ({ setBillData, billData, cashierName, chosenCount }: any) => {
   const [totalPrice, setTotalPrice] = React.useState(0);
   const [billPayload, setBillPayload]: any = React.useState(null);
   const [totalCash, setTotalCash] = React.useState(0);
-  const [billCount, setBillCount] = React.useState(0);
-
+  const [billCount, setBillCount] = React.useState(1);
+  
   const [
     ,
     loadingAddBill,
@@ -129,8 +129,8 @@ const Bill = ({ setBillData, billData, cashierName, chosenCount }: any) => {
 
   useEffect(() => {
     if (successGetTotalCash) {
-      setTotalCash(totalCashDetails?.totalCash);
-      setBillCount(totalCashDetails?.billCount);
+      setTotalCash(totalCashDetails?.totalCash || 0);
+      setBillCount(totalCashDetails?.billCount || 1);
     }
   }, [totalCashDetails]);
 
@@ -203,7 +203,7 @@ const Bill = ({ setBillData, billData, cashierName, chosenCount }: any) => {
     if (successAddBill) {
       setBillPayload(null);
       setTotalPrice(0);
-      setBillCount(0);
+      setBillCount(1);
       setBillData([]);
       handleGetTotalCash();
       setShowRemoveCashConfirmation(false);
